@@ -6,7 +6,7 @@ Created on Nov 9, 2014
 '''
 
 import socket
-from microprocesing import Process , Manager
+from multiprocessing import Process , Manager
 from server_commands import *
 from micro_commands import *
 from server.micro_commands import run_micro_server_command
