@@ -67,10 +67,10 @@ def run_get_position(client = None ,term = True , motor = None , date = None):
         return to_return
 
 def run_server_command(client,command , mem):
-    servem = mem["server_mem"].copy()
+    set_servem(mem.copy())
     if command in server_commands.iterkeys():
         server_commands[command](client)
-        mem["server_mem"] = get_servem()
+        mem["server_mem"] = servem.copy()
         
     else:
         client.send("> Unkown command")

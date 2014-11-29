@@ -40,6 +40,9 @@ spa_script = "./spa_alg/spa_main"
 def get_servem():
     return servem.copy()
 
+def set_servem(mem):
+    servem = mem
+
 
 
 def calculate_diference(init_date,current_date):
