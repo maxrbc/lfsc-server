@@ -5,11 +5,11 @@ Created on Nov 9, 2014
 @author: ricardo
 '''
 
-import socket
+import socket , os
 from multiprocessing import Process , Manager
 from server_commands import *
 from micro_commands import *
-from server.micro_commands import run_micro_server_command
+
 
 
 
@@ -44,11 +44,11 @@ def main():
         data = client.recv(size)
         
         if data == "CLIENT1":
-            terminal_server(s, client, command, mem)
+            terminal_server(s, client,mem)
                     
          
         elif data == "MICRO_CLIENT" :
-            micro_sever(s, client, command, mem)
+            micro_sever(s, client,mem)
            
         
         else :
