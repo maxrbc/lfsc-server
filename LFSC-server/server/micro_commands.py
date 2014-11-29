@@ -24,7 +24,7 @@ micro_commands = {
 
 
 def run_micro_server_command(client,command, mem):
-    pass
+    return mem
 
 def do_micro_job_submit():
     pass

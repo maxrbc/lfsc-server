@@ -62,13 +62,9 @@ def main():
            
             
             
-            
-            
-            
-    
+         
 
-
-def terminal_server(client,command , mem):
+def terminal_server(s,client, mem):
     
     print "hey its client one! \n"
     client.send("CONNECTED")
@@ -84,7 +80,7 @@ def terminal_server(client,command , mem):
 
 
 
-def micro_sever(client,command , mem):
+def micro_sever(s,client, mem):
     
     print "Hey its Micro client! \n"
     client.send("CONNECTED")
