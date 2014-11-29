@@ -66,11 +66,13 @@ def run_get_position(client = None ,term = True , motor = None , date = None):
             
         return to_return
 
-def run_server_command(client,command):
+def run_server_command(client,command , mem):
     if command in server_commands.iterkeys():
         server_commands[command](client)
+        mem["server_mem"] = servem.copy()
     else:
         client.send("> Unkown command")
+    
 
 def get_conf(client):
     conf = conf_parser(conf_path)
