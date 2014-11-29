@@ -70,7 +70,7 @@ def run_server_command(client,command , mem):
     set_servem(mem.copy())
     if command in server_commands.iterkeys():
         server_commands[command](client)
-        mem["server_mem"] = servem.copy()
+        mem["server_mem"].update(servem.copy())
         
     else:
         client.send("> Unkown command")
