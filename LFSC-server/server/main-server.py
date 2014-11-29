@@ -44,11 +44,15 @@ def main():
         data = client.recv(size)
         
         if data == "CLIENT1":
-            terminal_server(s, client,mem)
+            p = Process(target = terminal_server , args=(s, client,mem))
+            p.start()
+            p.join()
                     
          
         elif data == "MICRO_CLIENT" :
-            micro_sever(s, client,mem)
+            p = Process(target=micro_sever , args= (s, client,mem))
+            p.start()
+            p.join()
            
         
         else :
