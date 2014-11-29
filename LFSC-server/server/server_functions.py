@@ -35,6 +35,13 @@ spa_script = "./spa_alg/spa_main"
     
 '''
 
+
+
+def get_servem():
+    return servem.copy()
+
+
+
 def calculate_diference(init_date,current_date):
     import time as t
     init = date_converter(init_date)
