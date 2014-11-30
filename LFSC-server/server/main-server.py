@@ -44,20 +44,20 @@ def main():
         
         client , address = s.accept()
         data = client.recv(size)
-        print counter
+        
         
         
         if data == "CLIENT1":
             
             p = Process(target = terminal_server , args=(s, client,mem))
             p.start()
-            p.join()
+            
                     
          
         elif data == "MICRO_CLIENT" :
             p = Process(target=micro_sever , args= (s, client,mem))
             p.start()
-            p.join()
+            
            
         
         else :
@@ -73,6 +73,7 @@ def main():
 
 def terminal_server(s,client, mem):
     
+    s.close()
     print "hey its client one! \n"
     client.send("CONNECTED")
     command = client.recv(size)
@@ -94,15 +95,18 @@ def terminal_server(s,client, mem):
 
 def micro_sever(s,client, mem):
     
+    s.close()
     print "Hey its Micro client! \n"
     client.send("CONNECTED")
-    command = client.recv(size)
+    command = client.recv(size).strip()
+    
                 
     while not command == "CLOSING" :
         
-        run_server_command(client,command , mem)
+        print list(command)
+        run_micro_server_command(client,command , mem)
         client.send("ONLINE")
-        command = client.recv(size)
+        command = client.recv(size).strip()
         
         
         

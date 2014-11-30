@@ -6,7 +6,7 @@ Created on Nov 29, 2014
 
 from server_functions import *
 
-
+size = 1024
 
 '''
     Micro commands and communication to be served between system and microprocessor 
@@ -29,7 +29,7 @@ def run_micro_server_command(client,command, mem):
     else:
         set_servem(mem["server_mem"])
     
-    if command in server_commands.iterkeys():
+    if command in micro_commands.iterkeys():
         micro_commands[command](client)
         mem["server_mem"] = servem
         
@@ -44,16 +44,16 @@ def do_micro_job_submit():
 def do_micro_get_position(client):
     client.send("ACK_COMM")
     
-    date = client.recv(size) # ASK for the date to look for 
+    date = client.recv(size).strip() # ASK for the date to look for 
     motor_index = calculate_diference(servem["INIT_JOB"],date )
     motors_position = servem["MOTOR_POSITIONS"]
     client.send("ACK_DATE")
     
-    motor = client.recv(size) # ASk for the motor to be looked  [ one pos at time ] 
-    m_posit = motor_position[int(motor)]
+    motor = client.recv(size).strip() # ASk for the motor to be looked  [ one pos at time ] 
+    m_posit = motors_position[motor_index][int(motor)]
     
     client.send(str(m_posit))
-    client.recv(size) # RECV Motor ack that the motoro had arrived to the micro proc
+    client.recv(size).strip() # RECV Motor ack that the motoro had arrived to the micro proc
 
     pass
 
