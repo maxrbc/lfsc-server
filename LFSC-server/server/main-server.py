@@ -27,23 +27,28 @@ def main():
     s.listen(backlog)
     
     man = Manager()
-    mem = {
-           "server_mem" : man.dict() , 
-           "status" : {
-                       "RUNNING": False ,
-                        "NEED_CONF" : True ,
-                        "READING" : False
-                        }
+    mem_init = {
+           "server_mem" : get_servem(), 
+           "RUNNING": False ,
+            "NEED_CONF" : True ,
+            "READING" : False
            }
+           
+    mem = man.dict()
+    mem.update(mem_init)
     
+    counter = 0
     
     
     while 1 : 
         
         client , address = s.accept()
         data = client.recv(size)
+        print counter
+        
         
         if data == "CLIENT1":
+            
             p = Process(target = terminal_server , args=(s, client,mem))
             p.start()
             p.join()
@@ -59,6 +64,9 @@ def main():
             print "Unknown Connection .... will be shut\n"
             print "data sended :"+data+"_"
             client.send("No idea who you are! ")
+        
+        counter +=1
+        print "ON main " +str(mem["server_mem"]["INIT_JOB"])+"\n"
            
             
             
@@ -70,12 +78,17 @@ def terminal_server(s,client, mem):
     client.send("CONNECTED")
     command = client.recv(size)
                 
-    while not command == "EXT":
+    while not command == "CLOSING" :
+        
         run_server_command(client,command , mem)
-        client.recv(size)
         client.send("ONLINE")
         command = client.recv(size)
+        print mem["server_mem"]["INIT_JOB"]+"\n"
         
+        
+        
+    client.send("BYE BYE")
+    client.close()
     pass
 
 

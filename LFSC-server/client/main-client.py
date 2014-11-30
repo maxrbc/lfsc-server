@@ -60,7 +60,7 @@ def do_job_submit(conn):
 def toServer(s,command):
     
     
-    s.send("CLIENT1")
+    
     data = s.recv(size)
     
     s.send(command)
@@ -72,6 +72,7 @@ def toServer(s,command):
 def main_terminal():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((host,port))
+    s.send("CLIENT1")
     
     print("welcome to LFSC Terminal : \n")
     print("Commands to RUN \n")
@@ -88,6 +89,7 @@ def main_terminal():
     while(1):
         comm = raw_input(">")
         comm = str(comm).upper().strip()
+        
         
         if comm == "EXT":
             s.send("CLOSING")

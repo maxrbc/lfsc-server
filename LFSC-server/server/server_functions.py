@@ -41,7 +41,7 @@ def get_servem():
     return servem.copy()
 
 def set_servem(mem):
-    servem = mem
+    servem.update(mem)
 
 
 

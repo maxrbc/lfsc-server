@@ -67,10 +67,16 @@ def run_get_position(client = None ,term = True , motor = None , date = None):
         return to_return
 
 def run_server_command(client,command , mem):
-    set_servem(mem.copy())
+    if not mem["RUNNING"] : 
+        mem["RUNNING"]  = True
+    else:
+        set_servem(mem["server_mem"])
+    
     if command in server_commands.iterkeys():
         server_commands[command](client)
-        mem["server_mem"].update(servem.copy())
+        mem["server_mem"] = servem
+        print "From Commands "+servem["INIT_JOB"]+"\n"
+        print "From Commands "+mem["server_mem"]["INIT_JOB"]+"\n"
         
     else:
         client.send("> Unkown command")
