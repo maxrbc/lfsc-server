@@ -37,7 +37,7 @@ def main():
     mem = man.dict()
     mem.update(mem_init)
     
-    counter = 0
+    
     
     
     while 1 : 
@@ -65,8 +65,7 @@ def main():
             print "data sended :"+data+"_"
             client.send("No idea who you are! ")
         
-        counter +=1
-        print "ON main " +str(mem["server_mem"]["INIT_JOB"])+"\n"
+        
            
             
             
@@ -83,7 +82,7 @@ def terminal_server(s,client, mem):
         run_server_command(client,command , mem)
         client.send("ONLINE")
         command = client.recv(size)
-        print mem["server_mem"]["INIT_JOB"]+"\n"
+        
         
         
         
@@ -98,13 +97,18 @@ def micro_sever(s,client, mem):
     print "Hey its Micro client! \n"
     client.send("CONNECTED")
     command = client.recv(size)
-    
-    while not command == "EXT":
-        run_micro_server_command(client,command, mem)
-        client.recv(size)
+                
+    while not command == "CLOSING" :
+        
+        run_server_command(client,command , mem)
         client.send("ONLINE")
         command = client.recv(size)
         
+        
+        
+        
+    client.send("BYE BYE")
+    client.close()
     pass
 
 

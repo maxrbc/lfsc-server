@@ -75,8 +75,6 @@ def run_server_command(client,command , mem):
     if command in server_commands.iterkeys():
         server_commands[command](client)
         mem["server_mem"] = servem
-        print "From Commands "+servem["INIT_JOB"]+"\n"
-        print "From Commands "+mem["server_mem"]["INIT_JOB"]+"\n"
         
     else:
         client.send("> Unkown command")
