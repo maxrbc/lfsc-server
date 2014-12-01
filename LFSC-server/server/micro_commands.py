@@ -17,7 +17,8 @@ size = 1024
 micro_commands = {
                   "JOB_SUBMIT" : lambda client : do_micro_job_submit(client),
                   "GET_POSIT" : lambda client : do_micro_get_position(client),
-                  "SET_POSIT" : lambda client: do_set_motor_position(client)
+                  "SET_POSIT" : lambda client: do_set_motor_position(client),
+                  "SEND_PIC" : lambda client : do_get_picture(client)
                   }
 
 
