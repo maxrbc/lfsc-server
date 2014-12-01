@@ -17,7 +17,7 @@ from micro_commands import *
 def main():
     print str(os.getcwd())
     host = '0.0.0.0'
-    port = 50000
+    port = 40000
     backlog = 5 
     size = 1024
     

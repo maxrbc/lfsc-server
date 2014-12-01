@@ -10,7 +10,7 @@ from __builtin__ import str
 
 
 host = 'maxrberrios.koding.io'
-port = 50000
+port = 40000
 size = 1024
 
 
