@@ -57,5 +57,36 @@ def do_micro_get_position(client):
 
     pass
 
+def do_get_picture(client):
+    
+    # Routine to receive the picture from the microprocessor
+    client.send('ACK_COMM') 
+    # ack the command has been received and enter the routine
+    number_of_pkt = int(client.recv(size).strip())
+    # should receive a init number with the amount of steps (packets ) that will take receiving the whole pic 
+    client.send("RCV_NPKT")
+    picture_buff = []
+    for index_pkt in range(number_of_pkt):
+        picture_buff.extend(client.recv(size).strip())
+        client.send("RECV_PKT")
+        client.recv(size).strip() # should be NEXT or DONE if no more packets to be sended
+    
+    import time as t
+    log_folder = "./jobs/picture_"
+    file_name = t.strftime("%d_%m_%Y_%S_%M_%H" , t.localtime())
+    pic_log_name = log_folder+file_name+".jpeg"
+    
+    import binascii as ba
+    pic_str = ''
+    for hex in picture_buff:
+        pic_str = pic_str + ba.a2b_hex(hex)
+        
+    doc = open(pic_log_name,"w")
+    doc.write(pic_str)
+    doc.close()
+    
+        
+    pass
+
 def do_set_motor_position():
     pass
