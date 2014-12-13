@@ -72,18 +72,18 @@ def do_get_picture(client):
         client.send("RECV_PKT")
         client.recv(size).strip() # should be NEXT or DONE if no more packets to be sended
     
+    print str(picture_buff)
     import time as t
     log_folder = "./jobs/picture_"
     file_name = t.strftime("%d_%m_%Y_%S_%M_%H" , t.localtime())
     pic_log_name = log_folder+file_name+".jpeg"
     
     import binascii as ba
-    pic_str = ''
-    for hex in picture_buff:
-        pic_str = pic_str + ba.a2b_hex(hex)
+    pic_str = ''.join(picture_buff);
+    pic = ba.a2b_hex(pic_str)
         
     doc = open(pic_log_name,"w")
-    doc.write(pic_str)
+    doc.write(pic)
     doc.close()
     
         
