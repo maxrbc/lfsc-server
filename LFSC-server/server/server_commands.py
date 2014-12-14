@@ -117,7 +117,7 @@ def run_server_command(client,command , mem):
     
 
 def get_conf(client):
-    conf = conf_parser(conf_path)
+    conf = configuration()
     str= "Latitud : "+conf["latitud"]+" , \nLongitud : "+conf["longitud"]+" \nHieight : "+conf["height"]+"\n"
     print str
     client.send(str)

@@ -15,7 +15,7 @@ import pymongo
 IP = 'maxrberrios.koding.io'
 IP2 = 'localhost'
 
-client = pymongo.MongoClient(IP2,27017)
+client = pymongo.MongoClient(IP,27017)
 db  = client['lfsc-db'] 
 
 
@@ -138,7 +138,7 @@ def new_job(init_date , final_date):
  sun position
 '''
 
-def conf_parser(conf_path):
+def configuration():
     
     conf = {}
     table = db['configuration']
@@ -160,7 +160,7 @@ def conf_parser(conf_path):
 
 def job_submit(init_date , final_date):
     
-    conf = conf_parser(conf_path)
+    conf = configuration()
     servem ["CONF"] =  conf
     servem["INIT_JOB"] = init_date
     servem["FINAL_JOB"] = final_date
@@ -213,6 +213,10 @@ def job_submit(init_date , final_date):
     
     return
     
+def calculate_spa(date):
+    conf = configuration()
+    
+
 
 def calculate_motor_positions(cal_azimuth , cal_zenith):
     import math

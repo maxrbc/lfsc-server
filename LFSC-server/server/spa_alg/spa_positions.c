@@ -14,15 +14,19 @@
 
 int main(int argc , char *argv[]){
 
-	double lat,lon,height = {0};
+	double lat,lon,height,temperature,pressure = {0};
+
 	time_t initial = parse_date(argv[1]);
 	time_t final = parse_date(argv[2]);
 
 	lat = atof(argv[3]);
 	lon = atof(argv[4]);
 	height = atof(argv[5]);
+	temperature = atof(argv[6]);
+	pressure = atof(argv[7]);
 
-	double machine_position[] = { lat , lon , height };
+
+	double machine_position[] = { lat , lon , height  , temperature , pressure};
 	int measures = calculate_measures_between_dates(initial,final) + 1;
 	printf("MEASURES : %d\n",measures);
 
@@ -128,12 +132,18 @@ int make_position_calculation(motors *motors_data ,struct tm *local , double mac
 	spa.longitude = machine_pos[1];
 	spa.elevation = machine_pos[2];
 
+	spa.temperature = machine_pos[3];
+	spa.pressure = machine_pos[4];
+	spa.delta_t = 0;
+	spa.delta_ut1 = 0;
+
+
 // 18.21 -67.14 12
 
-	spa_calculate(&spa);
+	int error = spa_calculate(&spa);
 	motors_data->zenith = (spa.zenith);
 	motors_data->azimuth = (spa.azimuth - 180);
-
+	printf("Posible Error ? : %d\n",error);
 	printf(" The azimuth > %f \n The zenith > %f \n",motors_data->azimuth , motors_data->zenith);
 	return 0;
 
