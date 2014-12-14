@@ -10,9 +10,12 @@ Created on Nov 24, 2014
 @author: xaradrim
 '''
 import subprocess as sub
-import pymongo
+import pymongo 
 
-client = pymongo.MongoClient('maxrberrios.koding.io',27017)
+IP = 'maxrberrios.koding.io'
+IP2 = 'localhost'
+
+client = pymongo.MongoClient(IP2,27017)
 db  = client['lfsc-db'] 
 
 
@@ -114,7 +117,18 @@ def set_conf(lat=None , lon = None , height = None):
     table.insert(conf)
     
     pass
+
+
+def new_job(init_date , final_date):
+    table = db['jobs']
+    job = {}
+    job ['init_date'] = init_date
+    job [ 'final_date'] = final_date
+    job [' duration_time'] = calculate_diference(final_date , init_date)
+    job ['status'] = 'RUN'
     
+    table.insert(job)
+    pass
 
 
 
@@ -127,9 +141,14 @@ def set_conf(lat=None , lon = None , height = None):
 def conf_parser(conf_path):
     
     conf = {}
-    for line in open(conf_path , "r"):
-        if not "#" in line:
-            conf[line.split(">")[0].strip()] = line.split(">")[1].strip()
+    table = db['configuration']
+    entries = table.find()
+    temp = entries[entries.count() -1 ]
+    
+    for k,v in temp.iteritems():
+        if not k == '_id' : 
+            conf[k] = v
+    
     return conf
 
 

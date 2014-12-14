@@ -18,7 +18,8 @@ toServer_commands = {
                      "GET_POSIT":lambda conn : get_motors(conn),
                      "JOB_SUBMIT":lambda conn : do_job_submit(conn),
                      "CONF": lambda conn : do_get_conf(conn),
-                     "SET_CONF" : lambda conn : do_set_conf(conn)
+                     "SET_CONF" : lambda conn : do_set_conf(conn),
+                     "NEW_JOB" : lambda conn : do_new_job(conn)
                      }
 
     
@@ -43,6 +44,15 @@ def do_get_conf(conn):
     str = conn.recv(size)
     print str
 
+def do_new_job(conn):
+    print "CREATING NEW JOB \n"
+    init_date = raw_input(conn.recv(size))
+    conn.send(init_date)
+    final_date = raw_input(conn.recv(size))
+    conn.send(final_date)
+    print conn.recv(size)+"\n"
+    pass
+    
 
 def do_set_conf(conn):
     print "SET CONFIGURATION VALUE \n"

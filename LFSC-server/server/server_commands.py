@@ -15,7 +15,8 @@ server_commands = {
                    "JOB_SUBMIT" : lambda(client) : run_job_submit(client),
                    "GET_POSIT" : lambda (client): run_get_position(client),
                    "CONF" : lambda (client) : get_conf(client),
-                   "SET_CONF" : lambda (client) : run_set_conf(client)
+                   "SET_CONF" : lambda (client) : run_set_conf(client),
+                   "NEW_JOB" : lambda (client) : run_new_job(client)
                    }     
 
 
@@ -34,6 +35,20 @@ def run_job_submit(client  = None, term = True ,init_position = None , final_pos
         client.send("Job cannot be submitted .... Format problem with dates\n")
     
     return
+
+def run_new_job(client):
+    client.send("> INIT_DATE : ")
+    init_date = client.recv(size)
+    
+    client.send("> FINAL_DATE : ")
+    final_date = client.recv(size)
+    
+    ## Should soon test for boundary  cases as in for not correct behavior data
+    
+    
+    new_job(init_date, final_date)
+    client.send("JOB_SUBMITED")
+    pass
 
 
 def run_set_conf(client):
@@ -103,7 +118,7 @@ def run_server_command(client,command , mem):
 
 def get_conf(client):
     conf = conf_parser(conf_path)
-    str= "Latitud : "+conf["LATITUD"]+" , \nLongitud : "+conf["LONGITUD"]+" \nHieight : "+conf["HEIGHT"]+"\n"
+    str= "Latitud : "+conf["latitud"]+" , \nLongitud : "+conf["longitud"]+" \nHieight : "+conf["height"]+"\n"
     print str
     client.send(str)
     pass
