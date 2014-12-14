@@ -158,63 +158,45 @@ def configuration():
 '''
 
 
-def job_submit(init_date , final_date):
+def get_next_position(motor_id , date):
+    sun_position = calculate_spa(date)
+    motors = calculate_motor_positions(sun_position['azimuth'], sun_position['zenith'])
+    return motors[motor_id - 1]
     
-    conf = configuration()
-    servem ["CONF"] =  conf
-    servem["INIT_JOB"] = init_date
-    servem["FINAL_JOB"] = final_date
     
-    spa_output = sub.check_output([spa_script,init_date,final_date,conf["LATITUD"],conf["LONGITUD"],conf["HEIGHT"]])
-    print spa_output
-    list_output = spa_output.split("\n")
-    
-    sun_positions = []
-    num_positions = 0
-    
-    for e in list_output:
-        
-        if "====" in e:
-            sun_positions.append(dict())
-        if "Date" in e:
-            sun_positions[num_positions]["date"] = e.split(">")[1]
-        if "azimuth" in e:
-            sun_positions[num_positions]["azimuth"] = e.split(">")[1]
-        if "zenith" in e:
-            sun_positions[num_positions]["zenith"] = e.split(">")[1]
-            print e.split(">")[1]
-            num_positions += 1
-        
-            for k,v in sun_positions[num_positions-1].iteritems():
-                print str(k)+" : "+str(v)+"\n"
-                
-    dates = []
-    motor_positions  = []
-    
-    for position in sun_positions:
-        motors = calculate_motor_positions(position["azimuth"] , position["zenith"])
-        dates.append(position["date"])
-        motor_positions.append(motors)
-        
-    servem["DATES"] = dates
-    servem["MOTOR_POSITIONS"] = motor_positions
-    
-    for motor in motor_positions:
-        print str(motor)+"\n"
-        
-    
-    doc = open("./Logs/log_text_file.txt","w")
-    for line in motor_positions:
-        doc.write("==========================================\n")
-        doc.write(str(line))
-        doc.write("\n")
-    doc.close()
-        
-    
-    return
     
 def calculate_spa(date):
     conf = configuration()
+    
+    #calculation here are done for a single date alone 
+    
+    spa_output = sub.check_output([spa_script,
+                                   date,
+                                   date,
+                                   conf["latitud"],
+                                   conf["longitud"],
+                                   conf["height"],
+                                   conf['temperature'],
+                                   conf['pressure']
+                                   ])
+
+    list_output = spa_output.split("\n")
+    sun_position = {}
+        
+    for e in list_output:
+        
+        if "Date" in e:
+            sun_position["date"] = e.split(">")[1]
+        if "azimuth" in e:
+            sun_position["azimuth"] = e.split(">")[1]
+        if "zenith" in e:
+            sun_position["zenith"] = e.split(">")[1]
+        
+        
+    return sun_position
+            
+        
+    
     
 
 
