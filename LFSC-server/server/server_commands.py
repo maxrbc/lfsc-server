@@ -6,6 +6,7 @@ Created on Nov 24, 2014
 
 from server_functions import *
 
+
 size = 1024
 
 
@@ -13,7 +14,8 @@ size = 1024
 server_commands = {
                    "JOB_SUBMIT" : lambda(client) : run_job_submit(client),
                    "GET_POSIT" : lambda (client): run_get_position(client),
-                   "CONF" : lambda (client) : get_conf(client)
+                   "CONF" : lambda (client) : get_conf(client),
+                   "SET_CONF" : lambda (client) : run_set_conf(client)
                    }     
 
 
@@ -32,6 +34,23 @@ def run_job_submit(client  = None, term = True ,init_position = None , final_pos
         client.send("Job cannot be submitted .... Format problem with dates\n")
     
     return
+
+
+def run_set_conf(client):
+    
+    client.send("> latitud : ")
+    lat = client.recv(size)
+    
+    client.send("> longitud : ")
+    lon = client.recv(size)
+    
+    client.send("> Height : ")
+    height = client.recv(size)
+    
+    set_conf(lat, lon, height)
+    
+    pass
+    
 
 def run_get_position(client = None ,term = True , motor = None , date = None):
     if term:

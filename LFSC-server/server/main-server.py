@@ -1,4 +1,3 @@
-
 '''
 Created on Nov 9, 2014
 
@@ -16,7 +15,7 @@ from micro_commands import *
 
 def main():
     print str(os.getcwd())
-    host = '0.0.0.0'
+    host = 'localhost'
     port = 40000
     backlog = 5 
     size = 1024

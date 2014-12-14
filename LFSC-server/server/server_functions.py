@@ -10,6 +10,13 @@ Created on Nov 24, 2014
 @author: xaradrim
 '''
 import subprocess as sub
+import pymongo
+
+client = pymongo.MongoClient('maxrberrios.koding.io',27017)
+db  = client['lfsc-db'] 
+
+
+
 
 servem = {
           "MOTOR_POSITIONS": None ,
@@ -85,6 +92,29 @@ def date_converter(date):
     return new_date
 
 
+'''
+    
+'''
+def set_conf(lat=None , lon = None , height = None):
+    table = db['configuration']
+    conf = {}
+    
+    if not lat == None :
+        conf['latitud'] = lat
+    
+    if not lon == None :
+        conf ['longitud'] = lon
+        
+    if not height == None : 
+        conf['height'] = height 
+    
+    conf['temperature'] = 10 #kelvin degrees
+    conf['pressure'] = 1010 # atmosphere
+    
+    table.insert(conf)
+    
+    pass
+    
 
 
 

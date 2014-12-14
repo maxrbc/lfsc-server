@@ -9,7 +9,7 @@ from curses.ascii import isdigit
 from __builtin__ import str
 
 
-host = 'maxrberrios.koding.io'
+host = 'localhost'
 port = 40000
 size = 1024
 
@@ -17,7 +17,8 @@ size = 1024
 toServer_commands = {
                      "GET_POSIT":lambda conn : get_motors(conn),
                      "JOB_SUBMIT":lambda conn : do_job_submit(conn),
-                     "CONF": lambda conn : do_get_conf(conn)
+                     "CONF": lambda conn : do_get_conf(conn),
+                     "SET_CONF" : lambda conn : do_set_conf(conn)
                      }
 
     
@@ -41,6 +42,23 @@ def get_motors(conn):
 def do_get_conf(conn):
     str = conn.recv(size)
     print str
+
+
+def do_set_conf(conn):
+    print "SET CONFIGURATION VALUE \n"
+    lat = raw_input(conn.recv(size))
+    conn.send(lat)
+    lon = raw_input(conn.recv(size))
+    conn.send(lon)
+    height = raw_input(conn.recv(size))
+    conn.send(height)
+    
+    print "DONE CONFIG"
+    pass 
+    
+
+
+
     
 
 def do_job_submit(conn):
@@ -58,8 +76,6 @@ def do_job_submit(conn):
 
 
 def toServer(s,command):
-    
-    
     
     data = s.recv(size)
     
