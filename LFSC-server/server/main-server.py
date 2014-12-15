@@ -69,7 +69,7 @@ def terminal_server(s,client):
     while not command == "CLOSING" :
         
         run_server_command(client,command)
-        client.send("ONLINE")
+        #client.send("ONLINE")
         command = client.recv(size)
         
         
