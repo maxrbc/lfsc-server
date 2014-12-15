@@ -10,12 +10,13 @@ from server_commands import *
 from micro_commands import *
 
 
-
+H = '0.0.0.0'
+H2 = 'localhost'
 
 
 def main():
     print str(os.getcwd())
-    host = 'localhost'
+    host = H
     port = 40000
     backlog = 5 
     size = 1024
