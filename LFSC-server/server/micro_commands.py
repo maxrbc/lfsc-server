@@ -24,7 +24,7 @@ micro_commands = {
 
 
 
-def run_micro_server_command(client,command, mem):
+def run_micro_server_command(client,command):
     
     if command in micro_commands.iterkeys():
         micro_commands[command](client)
