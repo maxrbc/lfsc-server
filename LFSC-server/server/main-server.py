@@ -63,7 +63,7 @@ def terminal_server(s,client):
     
     s.close()
     print "hey its client one! \n"
-    #client.send("CONNECTED")
+    client.send("CONNECTED")
     
     command = client.recv(size)   
     while not command == "CLOSING" :
