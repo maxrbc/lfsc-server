@@ -61,7 +61,7 @@ def terminal_server(s,client):
     
     s.close()
     print "hey its client one! \n"
-    #client.send("CONNECTED")
+    client.send("CONNECTED")
     
     command = client.recv(size)  
      
@@ -69,7 +69,7 @@ def terminal_server(s,client):
         
         run_server_command(client,command)
         
-        #client.send("ONLINE")
+        client.send("ONLINE")
         command = client.recv(size)
         
         
