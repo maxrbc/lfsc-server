@@ -16,10 +16,10 @@ size = 1024
 
 toServer_commands = {
                      "GET_POSIT":lambda conn : get_motors(conn),
-                     "JOB_SUBMIT":lambda conn : do_job_submit(conn),
                      "CONF": lambda conn : do_get_conf(conn),
                      "SET_CONF" : lambda conn : do_set_conf(conn),
-                     "NEW_JOB" : lambda conn : do_new_job(conn)
+                     "NEW_JOB" : lambda conn : do_new_job(conn) , 
+                     "GET_JOB" : lambda conn : do_get_job(conn)
                      }
 
     
@@ -67,23 +67,10 @@ def do_set_conf(conn):
     pass 
     
 
-
-
-    
-
-def do_job_submit(conn):
-    prompt = conn.recv(size)
-    init_post = raw_input(prompt)
-    conn.send(init_post)
-    
-    prompt = conn.recv(size)
-    final_post = raw_input(prompt)
-    conn.send(final_post)
-    
-    a = conn.recv(size)
-    print " last received "+a+"\n"
-    
-
+def do_get_job(conn):
+    data = conn.recv(size)
+    print data
+    pass
 
 def toServer(s,command):
     
@@ -116,6 +103,11 @@ def main_terminal():
         comm = raw_input(">")
         comm = str(comm).upper().strip()
         
+        
+        
+        if comm == '':
+            print " Empty command \n "
+            continue
         
         if comm == "EXT":
             s.send("CLOSING")

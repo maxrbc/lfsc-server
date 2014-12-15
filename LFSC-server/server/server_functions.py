@@ -53,7 +53,18 @@ def get_servem():
 def set_servem(mem):
     servem.update(mem)
 
-
+def get_current_job():
+    
+    table = db['jobs']
+    entries = table.find()
+    temp = entries[entries.count() - 1]
+    job = {}
+    
+    for k,v in temp.iteritems():
+        if not k == '_id':
+            job[k] = v 
+    
+    return job
 
 def calculate_diference(init_date,current_date):
     import time as t
@@ -111,8 +122,8 @@ def set_conf(lat=None , lon = None , height = None):
     if not height == None : 
         conf['height'] = height 
     
-    conf['temperature'] = 10 #kelvin degrees
-    conf['pressure'] = 1010 # atmosphere
+    conf['temperature'] = str(10) #kelvin degrees
+    conf['pressure'] = str(1010) # atmosphere
     
     table.insert(conf)
     
@@ -161,7 +172,7 @@ def configuration():
 def get_next_position(motor_id , date):
     sun_position = calculate_spa(date)
     motors = calculate_motor_positions(sun_position['azimuth'], sun_position['zenith'])
-    return motors[motor_id - 1]
+    return motors[int(motor_id) - 1]
     
     
     
@@ -194,10 +205,6 @@ def calculate_spa(date):
         
         
     return sun_position
-            
-        
-    
-    
 
 
 def calculate_motor_positions(cal_azimuth , cal_zenith):

@@ -9,14 +9,13 @@ from server_functions import *
 
 size = 1024
 
-
-
 server_commands = {
                    
                    "GET_POSIT" : lambda (client): run_get_position(client),
                    "CONF" : lambda (client) : get_conf(client),
                    "SET_CONF" : lambda (client) : run_set_conf(client),
-                   "NEW_JOB" : lambda (client) : run_new_job(client)
+                   "NEW_JOB" : lambda (client) : run_new_job(client) , 
+                   "GET_JOB" : lambda (client) : do_get_current_job(client)
                    }     
 
 
@@ -30,8 +29,6 @@ def run_new_job(client):
     final_date = client.recv(size)
     
     ## Should soon test for boundary  cases as in for not correct behavior data
-    
-    
     new_job(init_date, final_date)
     client.send("JOB_SUBMITED")
     pass
@@ -87,11 +84,20 @@ def run_server_command(client,command , mem):
         client.send("> Unkown command")
     
     return mem
-    
 
+def do_get_current_job(client):
+    job = get_current_job()
+    print str(job.keys())
+    data = "INIT_DATE : {} \n FINAL_DATE : {} \n DURATION_TIME : {} \n STATUS : {} \n".format(
+                                                                                              job['init_date'],
+                                                                                              job['final_date'],
+                                                                                              job['duration_time'],
+                                                                                              job['status'])
+    client.send(data)
+    pass
+    
 def get_conf(client):
     conf = configuration()
-    str= "Latitud : "+conf["latitud"]+" , \nLongitud : "+conf["longitud"]+" \nHieight : "+conf["height"]+"\n"
-    print str
-    client.send(str)
+    data= "Latitud : "+conf["latitud"]+" , \nLongitud : "+conf["longitud"]+" \nHieight : "+conf["height"]+"\n"
+    client.send(data)
     pass

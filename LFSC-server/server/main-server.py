@@ -56,8 +56,7 @@ def main():
         elif data == "MICRO_CLIENT" :
             p = Process(target=micro_sever , args= (s, client,mem))
             p.start()
-            
-           
+              
         
         else :
             print "Unknown Connection .... will be shut\n"
