@@ -92,6 +92,7 @@ def main_terminal():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((host,port))
     s.send("CLIENT1")
+    s.recv(size)
     
     print("welcome to LFSC Terminal : \n")
     print("Commands to RUN \n")
