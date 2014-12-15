@@ -31,6 +31,7 @@ def run_new_job(client):
     ## Should soon test for boundary  cases as in for not correct behavior data
     new_job(init_date, final_date)
     client.send("CONFIGURATION SUBMITED")
+    client.recv(size)
     pass
 
 
