@@ -67,7 +67,7 @@ def run_get_position(client = None):
             client.recv(size)
         
         
-        client.send("DONE")
+        
         return
         
   
