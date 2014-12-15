@@ -46,6 +46,7 @@ def do_get_conf(conn):
 
 def do_new_job(conn):
     print "CREATING NEW JOB \n"
+    
     init_date = raw_input(conn.recv(size))
     conn.send(init_date)
     

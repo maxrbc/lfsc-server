@@ -55,9 +55,6 @@ def main():
             client.send("No idea who you are! ")
     
     
-        
-        
-           
             
             
          
@@ -66,9 +63,9 @@ def terminal_server(s,client):
     
     s.close()
     print "hey its client one! \n"
-    client.send("CONNECTED")
-    command = client.recv(size)
-                
+    #client.send("CONNECTED")
+    
+    command = client.recv(size)   
     while not command == "CLOSING" :
         
         run_server_command(client,command)
