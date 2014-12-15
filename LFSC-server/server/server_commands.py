@@ -67,7 +67,7 @@ def run_get_position(client = None):
             client.recv(size)
         
         
-        
+        client.send("DONE")
         return
         
   
@@ -98,6 +98,6 @@ def get_conf(client):
     conf = configuration()
     data= "Latitud : "+conf["latitud"]+" , \nLongitud : "+conf["longitud"]+" \nHeight : "+conf["height"]+"\n"
     client.send(data)
-    client.send("DONE")
+    
     
     pass
