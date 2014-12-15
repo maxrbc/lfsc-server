@@ -25,12 +25,12 @@ def run_new_job(client):
     client.send("> INIT_DATE : ")
     init_date = client.recv(size)
     
-    client.send("> FINAL_DATE : ")
+    client.send("> DURATION TIME : ")
     final_date = client.recv(size)
     
     ## Should soon test for boundary  cases as in for not correct behavior data
     new_job(init_date, final_date)
-    client.send("JOB_SUBMITED")
+    client.send("CONFIGURATION SUBMITED")
     pass
 
 
@@ -88,9 +88,8 @@ def run_server_command(client,command , mem):
 def do_get_current_job(client):
     job = get_current_job()
     print str(job.keys())
-    data = "INIT_DATE : {} \n FINAL_DATE : {} \n DURATION_TIME : {} \n STATUS : {} \n".format(
+    data = "INIT_DATE : {} \n DURATION_TIME : {} \n STATUS : {} \n".format(
                                                                                               job['init_date'],
-                                                                                              job['final_date'],
                                                                                               job['duration_time'],
                                                                                               job['status'])
     client.send(data)

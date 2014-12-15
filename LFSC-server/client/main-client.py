@@ -48,8 +48,8 @@ def do_new_job(conn):
     print "CREATING NEW JOB \n"
     init_date = raw_input(conn.recv(size))
     conn.send(init_date)
-    final_date = raw_input(conn.recv(size))
-    conn.send(final_date)
+    duration_time = raw_input(conn.recv(size))
+    conn.send(duration_time)
     print conn.recv(size)+"\n"
     pass
     
