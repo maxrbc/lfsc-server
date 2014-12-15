@@ -68,12 +68,7 @@ def terminal_server(s,client):
     while not command == "CLOSING" :
         
         run_server_command(client,command)
-        
-        #client.send("ONLINE")
         command = client.recv(size)
-        
-        
-        
         
     client.send("BYE BYE")
     client.close()
