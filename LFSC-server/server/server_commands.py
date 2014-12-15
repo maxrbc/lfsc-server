@@ -97,4 +97,5 @@ def get_conf(client):
     conf = configuration()
     data= "Latitud : "+conf["latitud"]+" , \nLongitud : "+conf["longitud"]+" \nHieight : "+conf["height"]+"\n"
     client.send(data)
+    
     pass

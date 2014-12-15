@@ -28,8 +28,6 @@ def main():
    
     
     
-    
-    
     while 1 : 
         
         client , address = s.accept()
@@ -65,10 +63,12 @@ def terminal_server(s,client):
     print "hey its client one! \n"
     client.send("CONNECTED")
     
-    command = client.recv(size)   
+    command = client.recv(size)  
+     
     while not command == "CLOSING" :
         
         run_server_command(client,command)
+        
         #client.send("ONLINE")
         command = client.recv(size)
         
