@@ -44,6 +44,7 @@ def do_get_conf(conn):
     str = conn.recv(size)
     print str
 
+
 def do_new_job(conn):
     print "CREATING NEW JOB \n"
     
@@ -78,7 +79,7 @@ def do_get_job(conn):
 
 def toServer(s,command):
     
-    data = s.recv(size)
+    #data = s.recv(size)
     
     s.send(command)
     toServer_commands[command](s)

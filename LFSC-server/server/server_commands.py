@@ -4,7 +4,7 @@ Created on Nov 24, 2014
 @author: xaradrim
 '''
 
-from server_functions import *
+from server_functions import * 
 
 
 size = 1024
@@ -30,8 +30,9 @@ def run_new_job(client):
     
     ## Should soon test for boundary  cases as in for not correct behavior data
     new_job(init_date, final_date)
+    
     client.send("CONFIGURATION SUBMITED")
-    client.recv(size)
+
     pass
 
 

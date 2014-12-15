@@ -3,7 +3,7 @@ Created on Nov 17, 2014
 
 @author: xaradrim
 '''
-
+ 
 '''
 Created on Nov 24, 2014
 
@@ -47,11 +47,6 @@ spa_script = "./spa_alg/spa_main"
 
 
 
-def get_servem():
-    return servem.copy()
-
-def set_servem(mem):
-    servem.update(mem)
 
 def get_current_job():
     
