@@ -25,16 +25,7 @@ def main():
     s.bind((host,port))
     s.listen(backlog)
     
-    man = Manager()
-    mem_init = {
-           "server_mem" : get_servem(), 
-           "RUNNING": False ,
-            "NEED_CONF" : True ,
-            "READING" : False
-           }
-           
-    mem = man.dict()
-    mem.update(mem_init)
+   
     
     
     
@@ -48,13 +39,13 @@ def main():
         
         if data == "CLIENT1":
             
-            p = Process(target = terminal_server , args=(s, client,mem))
+            p = Process(target = terminal_server , args=(s, client))
             p.start()
             
                     
          
         elif data == "MICRO_CLIENT" :
-            p = Process(target=micro_sever , args= (s, client,mem))
+            p = Process(target=micro_sever , args= (s, client))
             p.start()
               
         
@@ -71,7 +62,7 @@ def main():
             
          
 
-def terminal_server(s,client, mem):
+def terminal_server(s,client):
     
     s.close()
     print "hey its client one! \n"
@@ -80,7 +71,7 @@ def terminal_server(s,client, mem):
                 
     while not command == "CLOSING" :
         
-        run_server_command(client,command , mem)
+        run_server_command(client,command)
         client.send("ONLINE")
         command = client.recv(size)
         
@@ -93,7 +84,7 @@ def terminal_server(s,client, mem):
 
 
 
-def micro_sever(s,client, mem):
+def micro_sever(s,client):
     
     s.close()
     print "Hey its Micro client! \n"
@@ -104,7 +95,7 @@ def micro_sever(s,client, mem):
     while not command == "CLOSING" :
         
         print list(command)
-        run_micro_server_command(client,command , mem)
+        run_micro_server_command(client,command)
         client.send("ONLINE")
         command = client.recv(size).strip()
         

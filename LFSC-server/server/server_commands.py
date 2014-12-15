@@ -71,20 +71,16 @@ def run_get_position(client = None):
         
   
 
-def run_server_command(client,command , mem):
-    if not mem["RUNNING"] : 
-        mem["RUNNING"]  = True
-    else:
-        set_servem(mem["server_mem"])
+def run_server_command(client,command ):
+    
     
     if command in server_commands.iterkeys():
         server_commands[command](client)
-        mem["server_mem"] = servem
         
     else:
         client.send("> Unkown command")
     
-    return mem
+    
 
 def do_get_current_job(client):
     job = get_current_job()
@@ -95,6 +91,7 @@ def do_get_current_job(client):
                                                                                               job['status'])
     client.send(data)
     pass
+
     
 def get_conf(client):
     conf = configuration()
