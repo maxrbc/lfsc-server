@@ -102,11 +102,16 @@ def main_terminal():
     print "GET_POSIT\n it will ask for a date in format month/mday / year / hh : min\n"
     print("And lastly will ask for a motor to revise or a comma separated list [ 1,2,3,4,5 ]  \n")
     
-    print("JOB_SUBMIT \n")
-    print ( " It will ask for 2 dates , initial date for the test and the last \n")
+    print("NEW_JOB \n")
+    print ( " It will ask for initial date and duration time( in hours)  of run \n")
     print (" Both will be in std format and military hour \n")
     
+    print("GET_JOB\n")
+    print(" It will return current information otf the job time running \n")
+    
     print("EXT is for going out of the terminal\n")
+    print("SET_CONF \n")
+    print("will let you change the altitud , longitude and latitude\n")
     print("CONF to see the configuration \n")
     
     while(1):
