@@ -89,7 +89,62 @@ def toServer(s,command):
     
     
     return s
+
+
+
+
+def do_naming():
     
+    str  = '''
+               |\     /|(  ____ \( \      (  ____ \(  ___  )(       )(  ____ \  \__   __/(  ___  )  ( \      (  ____ \(  ____ \(  ____ \                
+    | )   ( || (    \/| (      | (    \/| (   ) || () () || (    \/     ) (   | (   ) |  | (      | (    \/| (    \/| (    \/                
+    | | _ | || (__    | |      | |      | |   | || || || || (__         | |   | |   | |  | |      | (__    | (_____ | |                      
+    | |( )| ||  __)   | |      | |      | |   | || |(_)| ||  __)        | |   | |   | |  | |      |  __)   (_____  )| |                      
+    | || || || (      | |      | |      | |   | || |   | || (           | |   | |   | |  | |      | (            ) || |                      
+    | () () || (____/\| (____/\| (____/\| (___) || )   ( || (____/\     | |   | (___) |  | (____/\| )      /\____) || (____/\                
+    (_______)(_______/(_______/(_______/(_______)|/     \|(_______/     )_(   (_______)  (_______/|/       \_______)(_______/                
+                                                                                                                                              
+     _______           _        _______  _______  _______            _________ _______  _______  _______ _________ _        _______  _       
+    (  ____ \|\     /|( (    /|(  ____ \(  ____ )(  ____ \|\     /|  \__   __/(  ____ \(  ____ )(       )\__   __/( (    /|(  ___  )( \      
+    | (    \/| )   ( ||  \  ( || (    \/| (    )|| (    \/( \   / )     ) (   | (    \/| (    )|| () () |   ) (   |  \  ( || (   ) || (      
+    | (_____ | |   | ||   \ | || (__    | (____)|| |       \ (_) /      | |   | (__    | (____)|| || || |   | |   |   \ | || (___) || |      
+    (_____  )| |   | || (\ \) ||  __)   |     __)| | ____   \   /       | |   |  __)   |     __)| |(_)| |   | |   | (\ \) ||  ___  || |      
+          ) || |   | || | \   || (      | (\ (   | | \_  )   ) (        | |   | (      | (\ (   | |   | |   | |   | | \   || (   ) || |      
+    /\____) || (___) || )  \  || (____/\| ) \ \__| (___) |   | |        | |   | (____/\| ) \ \__| )   ( |___) (___| )  \  || )   ( || (____/\
+    \_______)(_______)|/    )_)(_______/|/   \__/(_______)   \_/        )_(   (_______/|/   \__/|/     \|\_______/|/    )_)|/     \|(_______
+         
+     
+    '''
+    print(str+"\n")
+    
+
+def do_help():
+    help  = '''
+   
+    welcome to LFSC Terminal :
+    Commands to RUN 
+    
+
+    GET_POSIT it will ask for a date in format month/mday / year / hh : min
+    And lastly will ask for a motor to revise or a comma separated list [ 1,2,3,4,5 ]  
+    
+    NEW_JOB 
+      It will ask for initial date and duration time( in hours  of run 
+     Both will be in std format and military hour 
+    
+    GET_JOB
+    print( It will return current information otf the job time running 
+    
+    EXT is for going out of the terminal
+
+    SET_CONF 
+    will let you change the altitud , longitude and latitude
+
+    CONF 
+    to see the configuration
+    
+    '''
+    print help
 
 def main_terminal():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -97,55 +152,24 @@ def main_terminal():
     s.send("CLIENT1")
     s.recv(size)
     
-    str  = '''
+    time_count = 2
     
-    |\     /|(  ____ \( \      (  ____ \(  ___  )(       )(  ____ \  \__   __/(  ___  )  ( \      (  ____ \(  ____ \(  ____ \                
-| )   ( || (    \/| (      | (    \/| (   ) || () () || (    \/     ) (   | (   ) |  | (      | (    \/| (    \/| (    \/                
-| | _ | || (__    | |      | |      | |   | || || || || (__         | |   | |   | |  | |      | (__    | (_____ | |                      
-| |( )| ||  __)   | |      | |      | |   | || |(_)| ||  __)        | |   | |   | |  | |      |  __)   (_____  )| |                      
-| || || || (      | |      | |      | |   | || |   | || (           | |   | |   | |  | |      | (            ) || |                      
-| () () || (____/\| (____/\| (____/\| (___) || )   ( || (____/\     | |   | (___) |  | (____/\| )      /\____) || (____/\                
-(_______)(_______/(_______/(_______/(_______)|/     \|(_______/     )_(   (_______)  (_______/|/       \_______)(_______/                
-                                                                                                                                         
- _______           _        _______  _______  _______            _________ _______  _______  _______ _________ _        _______  _       
-(  ____ \|\     /|( (    /|(  ____ \(  ____ )(  ____ \|\     /|  \__   __/(  ____ \(  ____ )(       )\__   __/( (    /|(  ___  )( \      
-| (    \/| )   ( ||  \  ( || (    \/| (    )|| (    \/( \   / )     ) (   | (    \/| (    )|| () () |   ) (   |  \  ( || (   ) || (      
-| (_____ | |   | ||   \ | || (__    | (____)|| |       \ (_) /      | |   | (__    | (____)|| || || |   | |   |   \ | || (___) || |      
-(_____  )| |   | || (\ \) ||  __)   |     __)| | ____   \   /       | |   |  __)   |     __)| |(_)| |   | |   | (\ \) ||  ___  || |      
-      ) || |   | || | \   || (      | (\ (   | | \_  )   ) (        | |   | (      | (\ (   | |   | |   | |   | | \   || (   ) || |      
-/\____) || (___) || )  \  || (____/\| ) \ \__| (___) |   | |        | |   | (____/\| ) \ \__| )   ( |___) (___| )  \  || )   ( || (____/\
-\_______)(_______)|/    )_)(_______/|/   \__/(_______)   \_/        )_(   (_______/|/   \__/|/     \|\_______/|/    )_)|/     \|(_______
-    
-    
-    
-    
-    '''
-    print(str+"\n")
-    
-    
-    
-    
-    print("welcome to LFSC Terminal : \n")
-    print("Commands to RUN \n")
-    print "GET_POSIT\n it will ask for a date in format month/mday / year / hh : min\n"
-    print("And lastly will ask for a motor to revise or a comma separated list [ 1,2,3,4,5 ]  \n")
-    
-    print("NEW_JOB \n")
-    print ( " It will ask for initial date and duration time( in hours)  of run \n")
-    print (" Both will be in std format and military hour \n")
-    
-    print("GET_JOB\n")
-    print(" It will return current information otf the job time running \n")
-    
-    print("EXT is for going out of the terminal\n")
-    print("SET_CONF \n")
-    print("will let you change the altitud , longitude and latitude\n")
-    print("CONF to see the configuration \n")
+   
     
     while(1):
+        
+        count -= 1
+        if not count == 0 :
+            do_naming()
+            count = 2
+        
         comm = raw_input(">")
         comm = str(comm).upper().strip()
         
+        
+        if comm == "HELP":
+            do_help()
+            continue
         
         
         if comm == '':
