@@ -88,7 +88,7 @@ def micro_sever(s,client):
     while not command == "CLOSING" :
         
         print list(command)
-        run_micro_server_command(client,command)
+        run_micro_server_command(client,command.upper())
         client.send("ONLINE")
         command = client.recv(size).strip()
         
