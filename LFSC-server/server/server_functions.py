@@ -172,7 +172,7 @@ def get_next_position(motor_id , date):
     
 def calculate_spa(date):
     conf = configuration()
-    
+    print date
     #calculation here are done for a single date alone 
     
     spa_output = sub.check_output([spa_script,
