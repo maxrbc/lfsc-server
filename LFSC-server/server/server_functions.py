@@ -46,7 +46,13 @@ spa_script = "./spa_alg/spa_main"
 '''
 
 
-
+def set_job_status(status):
+    table = db['jobs']
+    entries = table.find()
+    temp = entries[entries.count() -1 ]
+    
+    temp['status'] = status
+    table.save(temp)
 
 def get_current_job():
     
