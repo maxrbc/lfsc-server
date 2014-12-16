@@ -152,15 +152,12 @@ def main_terminal():
     s.send("CLIENT1")
     s.recv(size)
     
-    count = 2
+    do_naming()
    
     
     while(1):
         
-        count -= 1
-        if not count == 0 :
-            do_naming()
-            count = 2
+       
         
         comm = raw_input(">")
         comm = str(comm).upper().strip()
