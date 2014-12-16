@@ -82,7 +82,10 @@ def toServer(s,command):
     #data = s.recv(size)
     
     s.send(command)
-    toServer_commands[command](s)
+    if command in toServer_commands.iterkeys():
+        toServer_commands[command](s)
+    else:
+        print s.recv(size)
     
     
     return s
