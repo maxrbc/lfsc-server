@@ -23,6 +23,7 @@ micro_commands = {
                   "GET_ALT" : lambda client : do_get_altitud(client),
                   "GET_INDT" : lambda client : do_get_statTime(client),
                   "GET_STAT" : lambda client : do_get_status(client),
+                  "GET_OPTM" : lambda client : do_get_OpTime(client),
                   "SEND_PIC" : lambda client : do_get_picture(client)
                   }
 
@@ -119,19 +120,19 @@ def do_get_altitud(client):
     pass
 
 def do_get_statTime(client):
-    conf = configuration()
-    client.send(conf['init_date'])
+    job = get_current_job()
+    client.send(job['init_date'])
     client.recv(size) ## Done flag 
     pass
 def do_get_OpTime(client):
-    conf = configuration()
-    client.send(str(conf['duration_time']))
+    job = get_current_job()
+    client.send(str(job['duration_time']))
     client.recv(size) ## Done flag 
     pass
 
 def do_get_status(client):
-    conf = configuration()
-    client.send(conf['status'])
+    job = get_current_job()
+    client.send(job['status'])
     client.recv(size) ## Done flag 
     pass
 
