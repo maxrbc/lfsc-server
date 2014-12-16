@@ -115,7 +115,7 @@ def do_get_longitud(client):
 
 def do_get_altitud(client):
     conf = configuration()
-    client.send(conf['altitud'])
+    client.send(conf['altitud']) 
     client.recv(size) ## Done flag 
     pass
 
