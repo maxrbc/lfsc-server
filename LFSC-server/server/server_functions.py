@@ -166,7 +166,7 @@ def configuration():
 def get_next_position(motor_id , date):
     sun_position = calculate_spa(date)
     motors = calculate_motor_positions(sun_position['azimuth'], sun_position['zenith'])
-    return motors[int(motor_id) - 1]
+    return str(motors[int(motor_id) - 1])
     
     
     
@@ -178,9 +178,9 @@ def calculate_spa(date):
     spa_output = sub.check_output([spa_script,
                                    date,
                                    date,
-                                   conf["latitud"],
-                                   conf["longitud"],
-                                   conf["height"],
+                                   conf['latitud'],
+                                   conf['longitud'],
+                                   conf['height'],
                                    conf['temperature'],
                                    conf['pressure']
                                    ])
