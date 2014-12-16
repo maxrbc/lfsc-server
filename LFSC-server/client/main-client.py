@@ -152,8 +152,7 @@ def main_terminal():
     s.send("CLIENT1")
     s.recv(size)
     
-    time_count = 2
-    
+    count = 2
    
     
     while(1):
