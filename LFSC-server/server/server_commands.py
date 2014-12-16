@@ -63,7 +63,14 @@ def run_get_position(client = None):
         
         
         for motor in motors_ids:
-            client.send(get_next_position(motor, date))
+            temp = get_next_position(motor, date)
+            
+            if not temp == None : 
+                client.send(temp)
+            else:
+                client.send("NEED TO CONFIG")
+                
+            
             client.recv(size)
         
         
