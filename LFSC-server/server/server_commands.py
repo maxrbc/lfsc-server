@@ -22,7 +22,7 @@ server_commands = {
 
 
 def run_new_job(client):
-    client.send("> INIT_DATE : ")
+    client.send("> START_TIME : ")
     init_date = client.recv(size)
     
     client.send("> DURATION TIME : ")
@@ -87,7 +87,7 @@ def do_get_current_job(client):
     job = get_current_job()
     print str(job.keys())
     data = "INIT_DATE : {} \n DURATION_TIME : {} \n STATUS : {} \n".format(
-                                                                                              job['init_date'],
+                                                                                              job['init_time'],
                                                                                               job['duration_time'],
                                                                                               job['status'])
     client.send(data)

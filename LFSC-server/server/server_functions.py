@@ -19,7 +19,7 @@ client = pymongo.MongoClient(IP,27017)
 db  = client['lfsc-db'] 
 
 
-
+ 
 
 servem = {
           "MOTOR_POSITIONS": None ,
@@ -134,7 +134,9 @@ def set_conf(lat=None , lon = None , height = None):
 def new_job(init_date , duration_time):
     table = db['jobs']
     job = {}
-    job ['init_date'] = init_date
+    
+    job ['init_time'] = init_date
+    
     job ['duration_time'] = duration_time
     job ['status'] = 'RUN'
     

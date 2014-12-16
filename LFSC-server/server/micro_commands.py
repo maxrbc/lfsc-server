@@ -7,7 +7,7 @@ Created on Nov 29, 2014
 from server_functions import *
 
 size = 1024
- 
+  
 '''
     Micro commands and communication to be served between system and microprocessor 
     of the project 
@@ -98,7 +98,7 @@ def do_get_picture(client):
 
 '''     
 
-
+ 
 def do_get_latitud(client):
     
     conf = configuration()
@@ -121,7 +121,7 @@ def do_get_altitud(client):
 
 def do_get_statTime(client):
     job = get_current_job()
-    client.send(job['init_date'])
+    client.send(job['init_time'])
     client.recv(size) ## Done flag 
     pass
 def do_get_OpTime(client):
